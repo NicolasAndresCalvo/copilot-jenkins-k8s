@@ -14,35 +14,44 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Build the Docker image from the Dockerfile
-                    docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}")
-                }
-            }
-        }
-
-        stage('Run Docker Image') {
+        stage('Test') {
             steps {
                 script {
                     // Run the Docker container locally
-                    sh "docker run -d -p 3000:3000 --name my-running-app ${DOCKER_IMAGE}:${IMAGE_TAG}"
+                    sh "ls -la"
                 }
             }
         }
-    }
 
-    post {
-        always {
-            echo 'Cleaning up...'
-            sh 'docker ps -a'  // List all containers to check if it’s running
-        }
-        success {
-            echo "Docker image ${DOCKER_IMAGE}:${IMAGE_TAG} built and running locally."
-        }
-        failure {
-            echo "Pipeline failed. Image not built."
-        }
-    }
+    //     stage('Build Docker Image') {
+    //         steps {
+    //             script {
+    //                 // Build the Docker image from the Dockerfile
+    //                 docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}")
+    //             }
+    //         }
+    //     }
+
+    //     stage('Run Docker Image') {
+    //         steps {
+    //             script {
+    //                 // Run the Docker container locally
+    //                 sh "docker run -d -p 3000:3000 --name my-running-app ${DOCKER_IMAGE}:${IMAGE_TAG}"
+    //             }
+    //         }
+    //     }
+    // }
+
+    // post {
+    //     always {
+    //         echo 'Cleaning up...'
+    //         sh 'docker ps -a'  // List all containers to check if it’s running
+    //     }
+    //     success {
+    //         echo "Docker image ${DOCKER_IMAGE}:${IMAGE_TAG} built and running locally."
+    //     }
+    //     failure {
+    //         echo "Pipeline failed. Image not built."
+    //     }
+    // }
 }
