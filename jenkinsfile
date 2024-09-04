@@ -7,10 +7,10 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repo') {
+        stage('Checkout Code') {
             steps {
                 // Clone your GitHub repository
-                git 'https://github.com/NicolasAndresCalvo/copilot-jenkins-k8s.git'
+                git branch: 'main', url: 'https://github.com/NicolasAndresCalvo/copilot-jenkins-k8s.git'
             }
         }
 
