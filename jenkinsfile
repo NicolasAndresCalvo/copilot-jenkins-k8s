@@ -14,11 +14,11 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     // Run the Docker container locally
-                    sh "ls -la"
+                    sh "docker build -t my-node-app ."
                 }
             }
         }
