@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'my-app'  // Replace with your desired local image name
+        IMAGE_TAG = "v1.0.${env.BUILD_ID}"  // Tagging image with build number
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                // Replace this URL with the URL of your Git repository
+                git 'https://github.com/NicolasAndresCalvo/copilot-jenkins-k8s'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Building the Docker image locally
+                    docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}")
+                }
+            }
+        }
+
+        stage('Run Docker Image') {
+            steps {
+                script {
+                    // Running the Docker image locally
+                    sh "docker run -d --name my-running-app ${DOCKER_IMAGE}:${IMAGE_TAG}"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
+            sh 'docker ps -a'  // List running containers
+        }
+        success {
+            echo "Docker image ${DOCKER_IMAGE}:${IMAGE_TAG} built and running locally."
+        }
+        failure {
+            echo "Pipeline failed. Image not built."
+        }
+    }
+}
