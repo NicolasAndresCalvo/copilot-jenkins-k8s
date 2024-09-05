@@ -22,6 +22,8 @@ Before running the application, ensure you have the following installed on your 
 
 #### Extract Admin Secret
 
+![pass](./images/pass.png)
+
     docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 
 ![jenkins](./images/jenkins.png)
