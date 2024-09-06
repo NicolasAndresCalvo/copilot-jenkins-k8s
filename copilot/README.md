@@ -8,6 +8,7 @@ Before running the application, ensure you have the following installed on your 
 - [Jenkins](https://hub.docker.com/repository/docker/nicolasandrescalvo/jenkins/general)
 
 #### Pull Docker Image
+
     docker pull nicolasandrescalvo/jenkins:v1.0
 
 #### Run Jenkins Locally
@@ -28,7 +29,9 @@ Before running the application, ensure you have the following installed on your 
 
 ![jenkins](./images/jenkins.png)
 
-## Step 1: Ask Copilot Chat to generate the workspace:
+## Steps
+
+### Step 1: Ask Copilot Chat to generate the workspace:
 
 > @workspace /new inside copilot-jenkins-k8s repository in the copilot directory. Create a simple node js app. Dockerfile to run it. And k8s manifests to run it locally
 
@@ -36,7 +39,7 @@ Before running the application, ensure you have the following installed on your 
 
 ![new](./images/new.png)
 
-## Step 2: Ask Copilot Chat how to run this app locally:
+### Step 2: Ask Copilot Chat how to run this app locally:
 
 > @workspace how to build this Docker Image? Give me instructions to build and test it locally in my machine
 
@@ -57,7 +60,7 @@ Before running the application, ensure you have the following installed on your 
 
     kubectl port-forward service/my-node-app 8080:80
 
-## Step 3: Ask Copilot Chat how to update k8s manifest:
+### Step 3: Ask Copilot Chat how to update k8s manifest:
 
 > @workspace update service.yaml, i need to be clusterip type. update deployment, to load image locally and not going to external repository, use policy type to never go to registry
 
